@@ -1,71 +1,79 @@
-
+// 1. Adicionamos 'return new Promise' para o JS saber quando a animação termina
 function renderizarConteudo(elemento, textoHTML) {
-    elemento.innerHTML = '';
-    
-    const tempDiv = document.createElement('div');
-    tempDiv.innerHTML = textoHTML;
-    
-    let delayAcumulado = 0;
-    
-    tempDiv.childNodes.forEach(node => {
-        if (node.nodeType === Node.TEXT_NODE) {
-            const palavras = node.textContent.split(' ');
-            palavras.forEach(palavra => {
-                if (palavra.trim() !== '') {
-                    const span = document.createElement('span');
-                    span.textContent = palavra;
-                    span.classList.add('palavraAnimada');
-                    span.style.animationDelay = `${delayAcumulado}s`;
-                    elemento.appendChild(span);
+    return new Promise((resolve) => {
+        elemento.innerHTML = '';
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = textoHTML;
+        let delayAcumulado = 0;
+        const nodes = Array.from(tempDiv.childNodes);
+
+        nodes.forEach((node, index) => {
+            if (node.nodeType === Node.TEXT_NODE) {
+                const palavras = node.textContent.split(' ');
+                palavras.forEach(palavra => {
+                    if (palavra.trim() !== '') {
+                        const span = document.createElement('span');
+                        span.textContent = palavra + ' ';
+                        span.classList.add('palavraAnimada');
+                        span.style.animationDelay = `${delayAcumulado}s`;
+                        elemento.appendChild(span);
+                        delayAcumulado += 0.05;
+                    }
+                });
+            } else {
+                const cloneNode = node.cloneNode(true);
+                if (cloneNode.tagName !== 'BR') {
+                    cloneNode.classList.add('palavraAnimada');
+                    cloneNode.style.animationDelay = `${delayAcumulado}s`;
                     delayAcumulado += 0.05;
                 }
-            });
-        } else {
-            const cloneNode = node.cloneNode(true);
-            if (cloneNode.tagName !== 'BR') {
-                cloneNode.classList.add('palavraAnimada');
-                cloneNode.style.animationDelay = `${delayAcumulado}s`;
-                delayAcumulado += 0.05;
+                elemento.appendChild(cloneNode);
             }
-            elemento.appendChild(cloneNode);
-        }
-    })
+            // Quando chega na última palavra do bloco, resolve a promessa
+            if (index === nodes.length - 1) {
+                setTimeout(resolve, (delayAcumulado + 0.4) * 1000);
+            }
+        });
+    });
 }
 
-//aqui são selecionados os elementos contidos no html
 const botoes = document.querySelectorAll('nav button');
 
-//aqui será feita a requisição do objeto do arquivo json
-//primeiro será reconhecido o conteúdo do botão clicado
 botoes.forEach(botao => {
-    botao.addEventListener('click', () => {
+    // 2. Usamos 'async' para permitir o uso de 'await' (espera)
+    botao.addEventListener('click', async () => {
         const termoBusca = botao.textContent.trim().toLowerCase();
         
-        //agora busca no json o objeto que tem o título igual ao termo de busca
-        fetch('./content/dados.json')
-        .then(response => response.json())
-        .then(dados => {
-            const conteudo = dados.find(item => item.titulo === termoBusca);
+        try {
+            const response = await fetch('./content/dados.json');
+            const dados = await response.json();
+            const conteudo = dados.find(item => item.titulo.toLowerCase() === termoBusca);
             
-            //se o conteúdo for encontrado, insere o título e o texto na seção
             if (conteudo) {
-                    const section = document.querySelector('section');
-                    section.innerHTML = ''; // Limpa o conteúdo anterior
+                const section = document.querySelector('section');
+                section.innerHTML = ''; 
 
-                    // Cria e insere o título
-                    const sectionH1 = document.createElement('h1');
-                    section.appendChild(sectionH1);
-                    renderizarConteudo(sectionH1, conteudo.titulo);
+                // Título
+                const sectionH1 = document.createElement('h1');
+                sectionH1.setAttribute('aria-label', conteudo.titulo);
+                section.appendChild(sectionH1);
+                // 3. 'await' faz o código parar aqui até o título terminar de animar
+                await renderizarConteudo(sectionH1, conteudo.titulo);
 
-                    // Cria e insere o texto
-                    conteudo.texto.forEach(paragrafoTexto => {
-                    const sectionP = document.createElement('p');
-                    section.appendChild(sectionP);
-                    renderizarConteudo(sectionP, paragrafoTexto);
-                    });
+                // Parágrafos
+                for (const textoParagrafo of conteudo.texto) {
+                    const p = document.createElement('p');
+                    const textoLimpo = textoParagrafo.replace(/<[^>]+>/g, '');
+                    p.setAttribute('role', 'text');
+                    p.setAttribute('aria-label', textoLimpo);
+                    section.appendChild(p);
+                    
+                    // 4. Espera cada parágrafo terminar antes de começar o próximo
+                    await renderizarConteudo(p, textoParagrafo);
                 }
-            })
-        //se ocorrer um erro na requisição do json, ele será exibido no console
-        .catch(error => console.error('Erro ao carregar o JSON: ',error));
+            }
+        } catch (error) {
+            console.error('Erro ao carregar o JSON: ', error);
+        }
     });
 });
