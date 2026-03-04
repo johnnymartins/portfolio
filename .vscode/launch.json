@@ -1,0 +1,39 @@
+{
+    // Use o IntelliSense para saber mais sobre os atributos possíveis.
+    // Focalizar para exibir as descrições dos atributos existentes.
+    // Para obter mais informações, acesse: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Edge: localhost:8080",
+            "request": "launch",
+            "type": "msedge",
+            "url": "http://localhost:8080",
+            "webRoot": "${workspaceFolder}",
+            "preLaunchTask": "Iniciar servidor local (8080)"
+        },
+        {
+            "name": "Edge: anexar em localhost:8080",
+            "request": "attach",
+            "type": "msedge",
+            "urlFilter": "http://localhost:8080/*",
+            "webRoot": "${workspaceFolder}"
+        },
+        {
+            "name": "Edge: index.html (sem servidor)",
+            "request": "launch",
+            "type": "msedge",
+            "file": "${workspaceFolder}/index.html",
+            "webRoot": "${workspaceFolder}"
+        },
+        {
+            "name": "Node: teste de debug (não roda script.js do navegador)",
+            "request": "launch",
+            "type": "node",
+            "program": "${workspaceFolder}/.vscode/node-check.js",
+            "skipFiles": [
+                "<node_internals>/**"
+            ]
+        }
+    ]
+}
