@@ -45,7 +45,7 @@ header nav {
     box-sizing: border-box;
 }
 
-nav button {
+.btn-menu {
     font-size: 13px;
     line-height: 16px;
     letter-spacing: 2%;
@@ -60,7 +60,7 @@ nav button {
     flex: 1 1 auto;
 }
 
-button:hover {
+.btn-menu:hover {
     background-color: #141414;
 }
 
@@ -165,7 +165,7 @@ form textarea {
     resize: vertical;
 }
 
-form button[type="submit"] {
+.btn-enviar {
     margin-top: 8px;
     padding: 10px 24px;
     font-size: 14px;
@@ -180,6 +180,6 @@ form button[type="submit"] {
     align-self: flex-start;
 }
 
-form button[type="submit"]:hover {
+.btn-enviar:hover {
     background-color: #ffffff;
 }

@@ -37,7 +37,7 @@ function insereTexto(elemento, textoHTML) {
     });
 }
 
-const botoes = document.querySelectorAll('nav button');
+const botoes = document.querySelectorAll('.btn-menu');
 
 
 botoes.forEach(botao => {
@@ -74,7 +74,7 @@ botoes.forEach(botao => {
                     <label for="mensagem">Mensagem:</label>
                     <textarea id="mensagem" name="mensagem" required></textarea>
                     
-                    <button type="submit">Enviar</button>
+                    <button type="submit" class="btn-enviar">Enviar</button>
                     `;
                     section.appendChild(form);
 
@@ -93,7 +93,7 @@ botoes.forEach(botao => {
                             return;
                         }
 
-                        alert('Mensagem enviada com sucesso!');
+                        alert('Mensagem enviada com sucesso.');
                         form.reset();
                     });
                     
