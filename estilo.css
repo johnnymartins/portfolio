@@ -64,6 +64,13 @@ button:hover {
     background-color: #141414;
 }
 
+section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
 section h1 {
     font-size: 22px;
     text-transform: uppercase;
@@ -108,6 +115,71 @@ section p::after {
 .palavraAnimada {
     display: inline-block;
     animation: entradaPalavra 0.4s ease-out forwards;
-    margin-right: 4px;
     opacity: 0;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 358px;
+    margin: 0 auto;
+    padding: 0;
+    animation: entradaPalavra 0.4s ease-out forwards;
+    opacity: 0;
+}
+
+form label {
+    font-size: 14px;
+    line-height: 22px;
+    color: #D6D6D6;
+    margin-bottom: 4px;
+    margin-top: 12px;
+}
+
+form label:first-child {
+    margin-top: 0;
+}
+
+form input,
+form textarea {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 14px;
+    font-family: 'inter';
+    color: #D6D6D6;
+    background-color: #1e1e1e;
+    border: 1px solid #3a3a3a;
+    border-radius: 4px;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+form input:focus,
+form textarea:focus {
+    border-color: #D6D6D6;
+}
+
+form textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+form button[type="submit"] {
+    margin-top: 8px;
+    padding: 10px 24px;
+    font-size: 14px;
+    font-family: 'inter';
+    font-weight: 600;
+    color: #141414;
+    background-color: #D6D6D6;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    align-self: flex-start;
+}
+
+form button[type="submit"]:hover {
+    background-color: #ffffff;
 }
