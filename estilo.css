@@ -115,6 +115,7 @@ section p::after {
 .palavraAnimada {
     display: inline-block;
     animation: entradaPalavra 0.4s ease-out forwards;
+    margin-right: 4px;
     opacity: 0;
 }
 
@@ -182,4 +183,9 @@ form textarea {
 
 .btn-enviar:hover {
     background-color: #ffffff;
+}
+
+a {
+    text-decoration:underline;
+    color: #D6D6D6;
 }
