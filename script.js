@@ -20,13 +20,15 @@ function insereTexto(elemento, textoHTML) {
                         delayAcumulado += 0.05;
                     }
                 });
+            } else if (node.tagName === 'BR') {
+                const quebra = document.createElement('span');
+                quebra.classList.add('quebra-linha');
+                elemento.appendChild(quebra);
             } else {
                 const cloneNode = node.cloneNode(true);
-                if (cloneNode.tagName !== 'BR') {
-                    cloneNode.classList.add('palavraAnimada');
-                    cloneNode.style.animationDelay = `${delayAcumulado}s`;
-                    delayAcumulado += 0.05;
-                }
+                cloneNode.classList.add('palavraAnimada');
+                cloneNode.style.animationDelay = `${delayAcumulado}s`;
+                delayAcumulado += 0.05;
                 elemento.appendChild(cloneNode);
             }
             // Quando chega na última palavra do bloco, resolve a promise
