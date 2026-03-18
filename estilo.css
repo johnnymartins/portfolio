@@ -1,8 +1,10 @@
+/* Configuração global de tipografia e cor padrão do documento */
 html {
     color: #D6D6D6;
     font-family: 'inter';
 }
 
+/* Base da página: ocupa toda a área visível e aplica o tema escuro */
 body {
     width: 100%;
     height: 100%;
@@ -11,6 +13,7 @@ body {
     color: #D6D6D6;
 }
 
+/* Cabeçalho centralizado com espaçamento superior */
 header {
     display: flex;
     flex-direction: column;
@@ -20,6 +23,7 @@ header {
     background-color: #06070a;
 }
 
+/* Estilo da imagem de perfil/logo no cabeçalho */
 header img {
     width: 133px;
     height: 200px;
@@ -27,6 +31,7 @@ header img {
     margin-bottom: 20px;
 }
 
+/* Linha divisória horizontal abaixo da imagem */
 header hr {
     width: 100%;
     border: none;
@@ -34,6 +39,7 @@ header hr {
     margin: 0 0 6px 0;
 }
 
+/* Barra de navegação do cabeçalho */
 header nav {
     height: 30px;
     display: flex;
@@ -45,6 +51,7 @@ header nav {
     box-sizing: border-box;
 }
 
+/* Botões do menu principal */
 .btn-menu {
     font-size: 13px;
     line-height: 16px;
@@ -60,10 +67,12 @@ header nav {
     flex: 1 1 auto;
 }
 
+/* Feedback visual ao passar o mouse nos botões do menu */
 .btn-menu:hover {
     background-color: #141414;
 }
 
+/* Estrutura padrão de cada seção de conteúdo */
 section {
     display: flex;
     flex-direction: column;
@@ -71,6 +80,7 @@ section {
     width: 100%;
 }
 
+/* Título principal das seções */
 section h1 {
     font-size: 22px;
     text-transform: uppercase;
@@ -83,6 +93,7 @@ section h1 {
     white-space: nowrap;
 }
 
+/* Parágrafos com animação de entrada */
 section p {
     font-size: 14px;
     line-height: 22px;
@@ -94,6 +105,7 @@ section p {
     animation: entradaPalavra 0.4s ease-out forwards;
 }
 
+/* Animação usada na entrada de textos e formulário */
 @keyframes entradaPalavra {
     from {
         transform: translateX(20px);
@@ -105,6 +117,7 @@ section p {
     }
 }
 
+/* Formulário centralizado com layout em coluna */
 form {
     display: flex;
     flex-direction: column;
@@ -115,6 +128,7 @@ form {
     opacity: 0;
 }
 
+/* Rótulos dos campos do formulário */
 form label {
     font-size: 14px;
     line-height: 22px;
@@ -123,10 +137,12 @@ form label {
     margin-top: 12px;
 }
 
+/* Remove margem superior apenas do primeiro label */
 form label:first-child {
     margin-top: 0;
 }
 
+/* Campos de entrada e área de texto */
 form input,
 form textarea {
     width: 100%;
@@ -142,16 +158,19 @@ form textarea {
     transition: border-color 0.3s;
 }
 
+/* Destaque do campo em foco para melhorar usabilidade */
 form input:focus,
 form textarea:focus {
     border-color: #D6D6D6;
 }
 
+/* Configuração específica do textarea */
 form textarea {
     min-height: 120px;
     resize: vertical;
 }
 
+/* Botão de envio do formulário */
 .btn-enviar {
     margin-top: 8px;
     padding: 10px 24px;
@@ -167,10 +186,12 @@ form textarea {
     align-self: flex-start;
 }
 
+/* Estado hover do botão de envio */
 .btn-enviar:hover {
     background-color: #ffffff;
 }
 
+/* Estilo padrão dos links */
 a {
     text-decoration:underline;
     color: #D6D6D6;
