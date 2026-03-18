@@ -3,6 +3,7 @@ const form = document.querySelector('form');
 function validaEmail(email) {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);
+    
 }
 
 form.addEventListener('submit', (event) => {
@@ -18,6 +19,3 @@ form.addEventListener('submit', (event) => {
     alert('Mensagem enviada com sucesso.');
     form.reset();
 });
-
-
-        
